@@ -1,5 +1,5 @@
 <shadow bootstraptime="300" environment="OPENSSL_ia32cap=~0x200000200000000;EVENT_NOSELECT=1;EVENT_NOPOLL=1;EVENT_NOKQUEUE=1;EVENT_NODEVPOLL=1;EVENT_NOEVPORT=1;EVENT_NOWIN32=1" preload="~/.shadow/lib/libshadow-interpose.so" stoptime="3600">
-	<topology path="/home/ruianp2/atlas.201801.shadow113.noloss.graphml.xml" />
+	<topology path="/tmp/atlas.201801.shadow113.noloss.nolimit.graphml.xml" />
   <plugin id="tor" path="~/.shadow/lib/libshadow-plugin-tor.so" />
   <plugin id="tor-preload" path="~/.shadow/lib/libshadow-preload-tor.so" />
   <plugin id="oniontrace" path="~/.shadow/bin/oniontrace" />
