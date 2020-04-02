@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 
 exit_band = {}
 exits = []
-max_band= 0
 config_tree = et.parse("shadow.config.xml")
 config_root = config_tree.getroot()
 for elem in config_root:
@@ -18,7 +17,6 @@ for elem in config_root:
     if re.match(r'relay\d+exit[a-z]*', hostname):
       exits.append(hostname)
       exit_band[hostname] = int(elem.attrib['bandwidthup'])
-      max_band = max(exit_band[hostname], max_band)
 
 exits.sort()
 exit_pub = {}
@@ -41,7 +39,7 @@ for e in exits:
   print e + ' ' + str(exit_band[e])
   print e + ' ' + str(bands)
 
-  plt.ylim(0,max_band * 1.1)
+  plt.ylim(0,max(exit_band[e], max(bands)) * 1.1)
   plt.plot(ans,'r')
   plt.plot(bands,'b')
   plt.ylabel('weight')
