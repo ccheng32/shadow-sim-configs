@@ -8,7 +8,6 @@ mpl.use('Agg')
 import matplotlib.pyplot as plt
 
 exit_band = {}
-exit_ip = {}
 exits = []
 max_band= 0
 config_tree = et.parse("shadow.config.xml")
@@ -18,58 +17,41 @@ for elem in config_root:
     hostname = elem.attrib['id']
     if re.match(r'relay\d+exit[a-z]*', hostname):
       exits.append(hostname)
-      exit_ip[hostname] = elem.attrib['iphint']
       exit_band[hostname] = int(elem.attrib['bandwidthup'])
       max_band = max(exit_band[hostname], max_band)
 
 exits.sort()
 exit_pub = {}
+fname = sys.argv[1]
+
+f = open(fname, 'r')
+for line in f:
+  pub = re.search(r'(Published bandwidth) (relay\d+exit[a-z]*)=(\d+)', line)
+  if pub:
+    e = pub.groups()[1]
+    if e not in exit_pub: exit_pub[e] = []
+    exit_pub[e].append(int(pub.groups()[2]))
+f.close()
+  
+max_iter = len(exit_pub[exits[0]])
 for e in exits:
-  relay_name = e
-  ip = exit_ip[e]
-  band = exit_band[e]
-  max_iter = int(sys.argv[1])
-  fname = sys.argv[2]
-  print relay_name, band
-  
-  arr = ip.split('.')
-  assert len(arr) == 4
-  c = (int(arr[0]) << 24) + (int(arr[1]) << 16) + (int(arr[2]) << 8) + int(arr[3])
-  c_str = hex(c)[2:]
-  
-  f = open(fname, 'r')
-  found_relay = False
-  bands = []
-  c_str_cnt = 0
-  for line in f:
-    if c_str in line:
-      found_relay = True
-    if found_relay:
-      pub = re.search(r'(published bandwidth:) (\d+)', line)
-      if pub:
-        found_relay = False
-        if c_str_cnt % 2 == 0:
-          bands.append(int(pub.groups()[1]))
-      c_str_cnt += 1
-    if len(bands) >= max_iter:
-      break
-  f.close()
-  print relay_name,bands
-  exit_pub[relay_name] = list(bands)
-  
-  ans = [band]*(max_iter)
+  bands = list(exit_pub[e])
+  del bands[1::2]
+  ans = [exit_band[e]] * len(bands)
+  print e + ' ' + str(exit_band[e])
+  print e + ' ' + str(bands)
 
   plt.ylim(0,max_band * 1.1)
   plt.plot(ans,'r')
   plt.plot(bands,'b')
   plt.ylabel('weight')
   plt.xlabel('round')
-  plt.title(relay_name + ' published weights')
-  plt.savefig(relay_name + '_publishedBW.png')
+  plt.title(e + ' published weights')
+  plt.savefig(e + '_publishedBW.png')
   plt.close()
+  max_iter = min(max_iter, len(bands))
 
 
-max_iter = min(max_iter, len(exit_pub[exits[0]]))
 pub_sums = [0] * max_iter
 for e in exits:
   for i in range(max_iter):
