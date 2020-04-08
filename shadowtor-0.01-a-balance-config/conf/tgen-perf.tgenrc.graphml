@@ -12,7 +12,7 @@
 <graph edgedefault="directed"><node id="start">
   <data key="d0">message</data>
   <data key="d2">server1:80,server2:80,server3:80,server4:80,server5:80,server6:80,server7:80,server8:80,server9:80,server10:80</data>
-  <data key="d1">localhost:9022,localhost:9050,localhost:9011</data>
+  <data key="d1">localhost:9011,localhost:9022,localhost:9050</data>
   <data key="d3">path</data>
 </node>
 <node id="spause">
@@ -53,7 +53,7 @@
 <node id="stream_50k">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
-  <data key="d1">localhost:9022</data>
+  <data key="d1">localhost:9050</data>
   <data key="d7">0 seconds</data>
   <data key="d8">590 seconds</data>
 </node>
