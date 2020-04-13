@@ -21,6 +21,9 @@ for elem in config_root:
 exits.sort()
 exit_pub = {}
 fname = sys.argv[1]
+max_iter = 10000000
+if len(sys.argv) > 2:
+  max_iter = int(sys.argv[2])
 
 f = open(fname, 'r')
 for line in f:
@@ -31,24 +34,38 @@ for line in f:
     exit_pub[e].append(int(pub.groups()[2]))
 f.close()
   
-max_iter = len(exit_pub[exits[0]])
+max_iter = min(max_iter, len(exit_pub[exits[0]]))
+err_mag_percents = {}
 for e in exits:
   bands = list(exit_pub[e])
   del bands[1::2]
   ans = [exit_band[e]] * len(bands)
   print e + ' ' + str(exit_band[e])
   print e + ' ' + str(bands)
+  err_mag_percents[e] = [100.0 * abs(float(bands[i] - ans[i])) / ans[i] for i in range(max_iter)]
 
-  plt.ylim(0,max(exit_band[e], max(bands)) * 1.1)
-  plt.plot(ans,'r')
-  plt.plot(bands,'b')
+  plt.ylim(0,max(exit_band[e], max(bands[:max_iter])) * 1.1)
+  plt.plot(ans[:max_iter],'r', label='True capacity')
+  plt.plot(bands[:max_iter],'b', label='Estimated capacity')
   plt.ylabel('weight')
   plt.xlabel('round')
   plt.title(e + ' published weights')
-  plt.savefig(e + '_publishedBW.png')
+  plt.legend(bbox_to_anchor=(0.5,-0.2), loc="lower center", ncol=  2)
+  plt.savefig(e + '_publishedBW.png', bbox_inches='tight')
   plt.close()
   max_iter = min(max_iter, len(bands))
 
+avg_err_mag_percents = []
+for i in range(max_iter):
+  avg_err_mag_percents.append(sum([err_mag_percents[a][i] for a in err_mag_percents]) / len(exits))
+print "Average error %", avg_err_mag_percents
+plt.plot(avg_err_mag_percents)
+plt.ylim(0, max(100, max(avg_err_mag_percents)))
+plt.xlabel('round')
+plt.ylabel('percentage (%)')
+plt.title('Average estimation error among all relays in each round')
+plt.savefig('average_error.png')
+plt.close()
 
 pub_sums = [0] * max_iter
 for e in exits:
