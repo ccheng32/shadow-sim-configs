@@ -58,11 +58,11 @@ for line in f:
     exit_pub[e].append(int(pub.groups()[2]))
 f.close()
   
-max_iter = min(max_iter, len(exit_pub[exits[0]]))
 err_mag_percents = {}
 for e in exits:
   bands = list(exit_pub[e])
   del bands[1::2]
+  max_iter = min(max_iter, len(bands))
   ans = [exit_band[e]] * len(bands)
   print e + ' ' + str(exit_band[e])
   print e + ' ' + str(bands)

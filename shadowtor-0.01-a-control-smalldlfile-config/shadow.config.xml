@@ -21,7 +21,7 @@
   <host id="bwauthority" bandwidthdown="1220700" bandwidthup="1220700" geocodehint="US">
     <process plugin="tor" preload="tor-preload" starttime="150" arguments="--Address ${NODEID} --Nickname ${NODEID} --DataDirectory shadow.data/hosts/${NODEID} --GeoIPFile ~/.shadow/share/geoip --defaults-torrc conf/tor.common.torrc -f conf/tor.client.torrc"/>
     <process plugin="torctl" starttime="151" arguments="localhost 9051 STREAM,CIRC,CIRC_MINOR,ORCONN,BW,STREAM_BW,CIRC_BW,CONN_BW"/>
-    <process plugin="torflow" starttime="293" arguments="Mode=TorFlow LogLevel=info ListenPort=18080 WriteRawBandwidth=True TorSocksPort=9000 TorControlPort=9051 FileServerInfo=bwauthority:18080 V3BWFilePath=shadow.data/hosts/bwauthority/v3bw ScanIntervalSeconds=35 NumParallelProbes=8 NumRelaysPerSlice=800 MaxRelayWeightFraction=1.00 OnlyMeasureExits=True ProbeTimeoutSeconds=265 NumProbesPerRelay=1"/>
+    <process plugin="torflow" starttime="293" arguments="Mode=TorFlow LogLevel=info ListenPort=18080 WriteRawBandwidth=True TorSocksPort=9000 TorControlPort=9051 FileServerInfo=bwauthority:18080 V3BWFilePath=shadow.data/hosts/bwauthority/v3bw OnlyMeasureExits=True ScanIntervalSeconds=35 NumParallelProbes=8 NumRelaysPerSlice=800 MaxRelayWeightFraction=1.00 ProbeTimeoutSeconds=265 NumProbesPerRelay=1"/>
   </host>
   <host bandwidthdown="33000" bandwidthup="33000" id="relay1exitguard" iphint="188.193.36.12">
     <process arguments="--Address relay1exitguard --Nickname relay1exitguard --DataDirectory shadow.data/hosts/relay1exitguard --GeoIPFile ~/.shadow/share/geoip --defaults-torrc conf/tor.common.torrc -f conf/tor.exitrelay.torrc " plugin="tor" preload="tor-preload" starttime="2" />
@@ -44,8 +44,8 @@
     <process arguments="Mode=log TorControlPort=9051 LogLevel=info Events=BW,ORCONN,CIRC,STREAM" plugin="oniontrace" starttime="4" />
   </host>
   <host bandwidthdown="5772" bandwidthup="5772" id="relay6exit" iphint="82.72.174.33">
-    <process arguments="--Address relay6exit --Nickname relay6exit --DataDirectory shadow.data/hosts/relay6exit --GeoIPFile ~/.shadow/share/geoip --defaults-torrc conf/tor.common.torrc -f conf/tor.exitrelay.torrc " plugin="tor" preload="tor-preload" starttime="6000" />
-    <process arguments="Mode=log TorControlPort=9051 LogLevel=info Events=BW,ORCONN,CIRC,STREAM" plugin="oniontrace" starttime="6000" />
+    <process arguments="--Address relay6exit --Nickname relay6exit --DataDirectory shadow.data/hosts/relay6exit --GeoIPFile ~/.shadow/share/geoip --defaults-torrc conf/tor.common.torrc -f conf/tor.exitrelay.torrc " plugin="tor" preload="tor-preload" starttime="3" />
+    <process arguments="Mode=log TorControlPort=9051 LogLevel=info Events=BW,ORCONN,CIRC,STREAM" plugin="oniontrace" starttime="4" />
   </host>
   <host bandwidthdown="8208" bandwidthup="8208" id="relay7exit" iphint="217.238.71.209">
     <process arguments="--Address relay7exit --Nickname relay7exit --DataDirectory shadow.data/hosts/relay7exit --GeoIPFile ~/.shadow/share/geoip --defaults-torrc conf/tor.common.torrc -f conf/tor.exitrelay.torrc " plugin="tor" preload="tor-preload" starttime="3" />
