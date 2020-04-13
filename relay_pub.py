@@ -7,6 +7,8 @@ import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt
 
+relay_band = {}
+relays = []
 exit_band = {}
 exits = []
 config_tree = et.parse("shadow.config.xml")
@@ -14,9 +16,31 @@ config_root = config_tree.getroot()
 for elem in config_root:
   if 'id' in elem.attrib:
     hostname = elem.attrib['id']
-    if re.match(r'relay\d+exit[a-z]*', hostname):
-      exits.append(hostname)
-      exit_band[hostname] = int(elem.attrib['bandwidthup'])
+    if re.match(r'relay\d+[a-z]*', hostname):
+      band = int(elem.attrib['bandwidthup'])
+      relay_band[hostname] = band
+      relays.append(hostname)
+      if 'exit' in hostname:
+        exits.append(hostname)
+        exit_band[hostname] = band
+
+relay_band_sorted = [relay_band[e] for e in relay_band]
+relay_band_sorted.sort()
+plt.plot(relay_band_sorted)
+plt.ylabel('capacity (kilobytes/s)')
+plt.xlabel('Relay sorted by capacity')
+plt.title('Distribution of relay capacities')
+plt.savefig('relay_capacities.png')
+plt.close()
+
+exit_band_sorted = [exit_band[e] for e in exit_band]
+exit_band_sorted.sort()
+plt.plot(exit_band_sorted)
+plt.ylabel('capacity (kilobytes/s)')
+plt.xlabel('Exit Relay sorted by capacity')
+plt.title('Distribution of exit relay capacities')
+plt.savefig('exit_relay_capacities.png')
+plt.close()
 
 exits.sort()
 exit_pub = {}
@@ -44,9 +68,9 @@ for e in exits:
   print e + ' ' + str(bands)
   err_mag_percents[e] = [100.0 * abs(float(bands[i] - ans[i])) / ans[i] for i in range(max_iter)]
 
-  plt.ylim(0,max(exit_band[e], max(bands[:max_iter])) * 1.1)
-  plt.plot(ans[:max_iter],'r', label='True capacity')
-  plt.plot(bands[:max_iter],'b', label='Estimated capacity')
+  plt.ylim(0,max(exit_band[e], max(bands[1:max_iter])) * 1.1)
+  plt.plot(ans[1:max_iter],'r', label='True capacity')
+  plt.plot(bands[1:max_iter],'b', label='Estimated capacity')
   plt.ylabel('weight')
   plt.xlabel('round')
   plt.title(e + ' published weights')
@@ -59,8 +83,8 @@ avg_err_mag_percents = []
 for i in range(max_iter):
   avg_err_mag_percents.append(sum([err_mag_percents[a][i] for a in err_mag_percents]) / len(exits))
 print "Average error %", avg_err_mag_percents
-plt.plot(avg_err_mag_percents)
-plt.ylim(0, max(100, max(avg_err_mag_percents)))
+plt.plot(avg_err_mag_percents[1:])
+plt.ylim(0, max(100, max(avg_err_mag_percents[1:])))
 plt.xlabel('round')
 plt.ylabel('percentage (%)')
 plt.title('Average estimation error among all relays in each round')
