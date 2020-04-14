@@ -21,10 +21,11 @@
 <node id="pause">
   <data key="d4">10 seconds</data>
 </node>
-<?ignore
+
 <node id="pause1">
   <data key="d4">10 seconds</data>
 </node>
+
 <node id="pause2">
   <data key="d4">10 seconds</data>
 </node>
@@ -49,7 +50,7 @@
 <node id="pause9">
   <data key="d4">10 seconds</data>
 </node>
-?>
+
 <node id="stream_50k">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
@@ -57,7 +58,7 @@
   <data key="d7">0 seconds</data>
   <data key="d8">590 seconds</data>
 </node>
-<?ignore
+
 <node id="stream_50k1">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
@@ -65,6 +66,8 @@
   <data key="d7">0 seconds</data>
   <data key="d8">590 seconds</data>
 </node>
+
+
 <node id="stream_50k2">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
@@ -121,11 +124,12 @@
   <data key="d7">0 seconds</data>
   <data key="d8">590 seconds</data>
 </node>
-?>
+
 <edge source="start" target="spause"/>
 <edge source="spause" target="stream_50k"/>
-<?ignore
+
 <edge source="spause" target="stream_50k1"/>
+
 <edge source="spause" target="stream_50k2"/>
 <edge source="spause" target="stream_50k3"/>
 <edge source="spause" target="stream_50k4"/>
@@ -134,10 +138,11 @@
 <edge source="spause" target="stream_50k7"/>
 <edge source="spause" target="stream_50k8"/>
 <edge source="spause" target="stream_50k9"/>
-?>
+
 <edge source="stream_50k" target="pause"/>
-<?ignore
+
 <edge source="stream_50k1" target="pause1"/>
+
 <edge source="stream_50k2" target="pause2"/>
 <edge source="stream_50k3" target="pause3"/>
 <edge source="stream_50k4" target="pause4"/>
@@ -146,10 +151,11 @@
 <edge source="stream_50k7" target="pause7"/>
 <edge source="stream_50k8" target="pause8"/>
 <edge source="stream_50k9" target="pause9"/>
-?>
+
 <edge source="pause" target="stream_50k"/>
-<?ignore
+
 <edge source="pause1" target="stream_50k1"/>
+
 <edge source="pause2" target="stream_50k2"/>
 <edge source="pause3" target="stream_50k3"/>
 <edge source="pause4" target="stream_50k4"/>
@@ -158,5 +164,5 @@
 <edge source="pause7" target="stream_50k7"/>
 <edge source="pause8" target="stream_50k8"/>
 <edge source="pause9" target="stream_50k9"/>
-?>
+
 </graph></graphml>
