@@ -118,7 +118,7 @@ for e in sorted_exits:
   # Create bw*(num_circs + 1) figure
   plt.plot(ans, color='r')
   plt.plot(prod, color = 'b')
-  plt.ylim(0,max_band*1.1)
+  plt.ylim(0,max(max(ans), max(prod))*1.1)
   plt.xlabel('round')
   plt.ylabel('total bandwidth (KB/s)')
   plt.title('observation x (1+num_circs) at each round for ' + e)
