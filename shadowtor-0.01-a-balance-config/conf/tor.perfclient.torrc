@@ -6,3 +6,4 @@ SocksPort 9011
 SocksPort 9022
 UseEntryGuards 0
 MaxCircuitDirtiness 10 seconds
+MaxClientCircuitsPending 1
