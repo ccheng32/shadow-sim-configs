@@ -7,7 +7,7 @@ ServerDNSTestAddresses 4uthority1,4uthority2,4uthority3
 ServerDNSAllowBrokenConfig 1
 ServerDNSDetectHijacking 0
 NumCPUs 1
-Log debug stdout
+Log info stdout
 SafeLogging 0
 LogTimeGranularity 1
 ContactInfo https://github.com/shadow/shadow-plugin-tor/issues

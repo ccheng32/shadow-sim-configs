@@ -18,10 +18,11 @@
 <node id="spause">
   <data key="d4">10 seconds</data>
 </node>
+
 <node id="pause">
   <data key="d4">10 seconds</data>
 </node>
-
+<?ignore
 <node id="pause1">
   <data key="d4">10 seconds</data>
 </node>
@@ -50,21 +51,22 @@
 <node id="pause9">
   <data key="d4">10 seconds</data>
 </node>
+?>
 
 <node id="stream_50k">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
   <data key="d1">localhost:9050</data>
   <data key="d7">0 seconds</data>
-  <data key="d8">590 seconds</data>
+  <data key="d8">300 seconds</data>
 </node>
-
+<?ignore
 <node id="stream_50k1">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
   <data key="d1">localhost:9050</data>
   <data key="d7">0 seconds</data>
-  <data key="d8">590 seconds</data>
+  <data key="d8">300 seconds</data>
 </node>
 
 
@@ -73,61 +75,62 @@
   <data key="d6">4096 MiB</data>
   <data key="d1">localhost:9011</data>
   <data key="d7">0 seconds</data>
-  <data key="d8">590 seconds</data>
+  <data key="d8">300 seconds</data>
 </node>
 <node id="stream_50k3">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
   <data key="d1">localhost:9022</data>
   <data key="d7">0 seconds</data>
-  <data key="d8">590 seconds</data>
+  <data key="d8">300 seconds</data>
 </node>
 <node id="stream_50k4">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
   <data key="d1">localhost:9022</data>
   <data key="d7">0 seconds</data>
-  <data key="d8">590 seconds</data>
+  <data key="d8">300 seconds</data>
 </node>
 <node id="stream_50k5">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
   <data key="d1">localhost:9022</data>
   <data key="d7">0 seconds</data>
-  <data key="d8">590 seconds</data>
+  <data key="d8">300 seconds</data>
 </node>
 <node id="stream_50k6">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
   <data key="d1">localhost:9022</data>
   <data key="d7">0 seconds</data>
-  <data key="d8">590 seconds</data>
+  <data key="d8">300 seconds</data>
 </node>
 <node id="stream_50k7">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
   <data key="d1">localhost:9022</data>
   <data key="d7">0 seconds</data>
-  <data key="d8">590 seconds</data>
+  <data key="d8">300 seconds</data>
 </node>
 <node id="stream_50k8">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
   <data key="d1">localhost:9022</data>
   <data key="d7">0 seconds</data>
-  <data key="d8">590 seconds</data>
+  <data key="d8">300 seconds</data>
 </node>
 <node id="stream_50k9">
   <data key="d5">1000 bytes</data>
   <data key="d6">4096 MiB</data>
   <data key="d1">localhost:9022</data>
   <data key="d7">0 seconds</data>
-  <data key="d8">590 seconds</data>
+  <data key="d8">300 seconds</data>
 </node>
-
+?>
 <edge source="start" target="spause"/>
 <edge source="spause" target="stream_50k"/>
 
+<?ignore
 <edge source="spause" target="stream_50k1"/>
 
 <edge source="spause" target="stream_50k2"/>
@@ -138,9 +141,10 @@
 <edge source="spause" target="stream_50k7"/>
 <edge source="spause" target="stream_50k8"/>
 <edge source="spause" target="stream_50k9"/>
+?>
 
 <edge source="stream_50k" target="pause"/>
-
+<?ignore
 <edge source="stream_50k1" target="pause1"/>
 
 <edge source="stream_50k2" target="pause2"/>
@@ -151,9 +155,10 @@
 <edge source="stream_50k7" target="pause7"/>
 <edge source="stream_50k8" target="pause8"/>
 <edge source="stream_50k9" target="pause9"/>
+?>
 
+<?ignore
 <edge source="pause" target="stream_50k"/>
-
 <edge source="pause1" target="stream_50k1"/>
 
 <edge source="pause2" target="stream_50k2"/>
@@ -164,5 +169,6 @@
 <edge source="pause7" target="stream_50k7"/>
 <edge source="pause8" target="stream_50k8"/>
 <edge source="pause9" target="stream_50k9"/>
+?>
 
 </graph></graphml>
