@@ -5307,5 +5307,4 @@
     <process arguments="Mode=log TorControlPort=9051 LogLevel=info Events=BW,ORCONN,CIRC,STREAM" plugin="oniontrace" starttime="150" />
     <process arguments="conf/tgen-perf.tgenrc.graphml" plugin="tgen" starttime="258" />
   </host>
-
 </shadow>
